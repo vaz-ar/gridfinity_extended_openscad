@@ -7,24 +7,24 @@ include <modules/functions_general.scad>
 /* [Tray] */
 tray_corner_radius = 2;
 
-//Height above the base height
+// Height above the base height
 tray_zpos = 0;
 tray_magnet_radius = 5;
 tray_magnet_thickness = 5;
-tray_spacing = 2; //0.1
+tray_spacing = 2; // 0.1
 tray_vertical_compartments = 1;
 tray_horizontal_compartments = 1;
 
 /*
-xpos,ypos,xsize,ysize,radius,depth. 
+xpos,ypos,xsize,ysize,radius,depth.
 dimensions of the tray cutout, a string with comma separated values, and pipe (|) separated trays.
- - xpos, ypos, the x/y position in gridinity units.
- - xsize, ysize. the x/y size in gridinity units. 
+ - xpos, ypos, the x/y position in gridfinity units.
+ - xsize, ysize. the x/y size in gridfinity units.
  - radius, [optional] corner radius in mm.
  - depth, [optional] depth in mm
  - example "0,0,2,1|2,0,2,1,2,5"
 */
-//[[xpos,ypos,xsize,ysize,radius,depth]]. xpos, ypos, the x/y position in gridinity units.xsize, ysize. the x/y size in gridinity units. radius, [optional] corner radius in mm.depth, [optional] depth in mm\nexample "0,0,2,1|2,0,2,1,2,5"
+//[[xpos,ypos,xsize,ysize,radius,depth]]. xpos, ypos, the x/y position in gridfinity units.xsize, ysize. the x/y size in gridfinity units. radius, [optional] corner radius in mm.depth, [optional] depth in mm\nexample "0,0,2,1|2,0,2,1,2,5"
 tray_custom_compartments = "0, 0, 0.5, 3, 2, 6|0.5, 0, 0.5, 3,2, 6|1, 0, 3, 1.5|1, 1.5, 3, 1.5";
 /*<!!end gridfinity_tray!!>*/
 
@@ -37,12 +37,12 @@ depth = [3, 0]; //0.5
 // Z dimension excluding. grid units (multiples of 7mm) or mm.
 height = [3, 0]; //0.1
 // Fill in solid block (overrides all following options)
-filled_in = true; 
+filled_in = true;
 // Wall thickness of outer walls. default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
 wall_thickness = 0;  // .01
 // Remove some or all of lip
 lip_style = "normal";  // [ normal, reduced, minimum, none:not stackable ]
-position = "center"; //[default",center,zero]
+position = "center"; // [default, center, zero]
 //under size the bin top by this amount to allow for better stacking
 zClearance = 0; // 0.1
 
@@ -67,7 +67,7 @@ vertical_separator_config = "10.5|21|42|50|60";
 horizontal_irregular_subdivisions = false;
 // Separator positions are defined in terms of grid units from the left end
 horizontal_separator_config = "10.5|21|42|50|60";
-      
+
 /* [Base] */
 // (Zack's design uses magnet diameter of 6.5)
 magnet_diameter = 0;  // .1
@@ -83,7 +83,7 @@ box_corner_attachments_only = true;
 floor_thickness = 0.7;
 cavity_floor_radius = -1;// .1
 // Efficient floor option saves material and time, but the internal floor is not flat
-efficient_floor = "off";//[off,on,rounded,smooth] 
+efficient_floor = "off";//[off,on,rounded,smooth]
 // Enable to subdivide bottom pads to allow half-cell offsets
 half_pitch = false;
 // Removes the internal grid from base the shape
@@ -95,7 +95,7 @@ spacer = false;
 label_style = "disabled"; //[disabled: no label, normal:normal, click]
 // Include overhang for labeling (and specify left/right/center justification)
 label_position = "left"; // [left, right, center, leftchamber, rightchamber, centerchamber]
-// Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4. 
+// Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4.
 label_size = [0,14,0,0.6]; // 0.01
 // Creates space so the attached label wont interferr with stacking
 label_relief = 0; // 0.1
@@ -120,9 +120,9 @@ wallpattern_style = "grid"; //[grid, hexgrid, voronoi,voronoigrid,voronoihexgrid
 // Spacing between pattern
 wallpattern_hole_spacing = 2; //0.1
 // wall to enable on, front, back, left, right.
-wallpattern_walls=[1,1,1,1]; 
+wallpattern_walls=[1,1,1,1];
 // Add the pattern to the dividers
-wallpattern_dividers_enabled="disabled"; //[disabled, horizontal, vertical, both] 
+wallpattern_dividers_enabled="disabled"; //[disabled, horizontal, vertical, both]
 //Number of sides of the hole op
 wallpattern_hole_sides = 6; //[4:square, 6:Hex, 64:circle]
 //Size of the hole
@@ -144,9 +144,9 @@ wallcutout_height=0;
 wallcutout_corner_radius=5;
 
 /* [Extendable] */
-extention_x_enabled = false;
-extention_y_enabled = false;
-extention_tabs_enabled = true;
+extension_x_enabled = false;
+extension_y_enabled = false;
+extension_tabs_enabled = true;
 
 /* [debug] */
 //Slice along the x axis
@@ -171,23 +171,23 @@ idepth = 5;
 // module to build the tray cutouts
 // This is what will be executed by external scripts
 module tray(
-  num_x=1, 
-  num_y=2, 
-  num_z, 
-  cornerRadius, 
-  trayZpos, 
+  num_x=1,
+  num_y=2,
+  num_z,
+  cornerRadius,
+  trayZpos,
   spacing,
-  cutoutSize, 
+  cutoutSize,
   baseHeight,
   floorThickness,
   wallThickness,
   verticalCompartments = 1,
   horizontalCompartments = 1,
-  customCompartments = "") 
+  customCompartments = "")
 {
 
   cellSpacing = spacing/2;
-  
+
   verticalCompartments = verticalCompartments > 0 ? verticalCompartments : num_x ;
   horizontalCompartments = horizontalCompartments > 0 ? horizontalCompartments : num_y;
   //todo, this could be simplified, by to produce a single array for ether scenario.
@@ -199,7 +199,7 @@ module tray(
     xStep = xSize + spacing;
     ySize = (num_y*gf_pitch-(horizontalCompartments+1)*spacing)/horizontalCompartments;
     yStep = ySize + spacing;
-    
+
     for(x =[0:1:verticalCompartments-1])
     {
       for(y =[0:1:horizontalCompartments-1])
@@ -220,7 +220,7 @@ module tray(
     //custom components
     compartments = split(customCompartments, "|");
 
-    
+
     scl = [
       (num_x*gf_pitch-cellSpacing*2)/(num_x*gf_pitch),
       (num_y*gf_pitch-cellSpacing*2)/(num_y*gf_pitch),1];
@@ -237,7 +237,7 @@ module tray(
           ysize = comp[iysize];
           radius = len(comp) >= 5 ? comp[icornerradius] : cornerRadius;
           depth = baseHeight+(len(comp) >= 6 ? comp[idepth] : max(trayZpos,floorThickness));
-        
+
           translate([cellSpacing+xpos*gf_pitch,cellSpacing+ypos*gf_pitch,depth])
           roundedCube(
               xsize*gf_pitch-cellSpacing*2,
@@ -255,148 +255,148 @@ module tray(
 module gridfinity_tray(
   //tray settings
   tray_spacing = tray_spacing,
-  tray_corner_radius = tray_corner_radius, 
-  tray_zpos = tray_zpos, 
+  tray_corner_radius = tray_corner_radius,
+  tray_zpos = tray_zpos,
   tray_vertical_compartments = tray_vertical_compartments,
   tray_horizontal_compartments = tray_horizontal_compartments,
   tray_custom_compartments = tray_custom_compartments,
-    
+
   //gridfinity settings
-  width=width, depth=depth, height=height,
-  position=position,
-  filled_in=filled_in,
-  label_style=label_style,
-  label_position=label_position,
-  label_size=label_size,
-  label_relief=label_relief,
-  fingerslide=fingerslide,
-  fingerslide_radius=fingerslide_radius,
-  magnet_diameter=magnet_diameter,
-  screw_depth=screw_depth,
-  center_magnet_diameter=center_magnet_diameter,
-  center_magnet_thickness=center_magnet_thickness,
-  floor_thickness=floor_thickness,
-  cavity_floor_radius=cavity_floor_radius,
-  wall_thickness=wall_thickness,
-  hole_overhang_remedy=hole_overhang_remedy,
-  efficient_floor=efficient_floor,
-  chamber_wall_thickness=chamber_wall_thickness,
+  width = width, depth = depth, height = height,
+  position = position,
+  filled_in = filled_in,
+  label_style = label_style,
+  label_position = label_position,
+  label_size = label_size,
+  label_relief = label_relief,
+  fingerslide = fingerslide,
+  fingerslide_radius = fingerslide_radius,
+  magnet_diameter = magnet_diameter,
+  screw_depth = screw_depth,
+  center_magnet_diameter = center_magnet_diameter,
+  center_magnet_thickness = center_magnet_thickness,
+  floor_thickness = floor_thickness,
+  cavity_floor_radius = cavity_floor_radius,
+  wall_thickness = wall_thickness,
+  hole_overhang_remedy = hole_overhang_remedy,
+  efficient_floor = efficient_floor,
+  chamber_wall_thickness = chamber_wall_thickness,
   vertical_chambers = vertical_chambers,
-  vertical_separator_bend_position=vertical_separator_bend_position,
-  vertical_separator_bend_angle=vertical_separator_bend_angle,
-  vertical_separator_bend_separation=vertical_separator_bend_separation,
-  vertical_separator_cut_depth=vertical_separator_cut_depth,
-  vertical_irregular_subdivisions=vertical_irregular_subdivisions,
-  vertical_separator_config=vertical_separator_config,
-  horizontal_chambers=horizontal_chambers,
-  horizontal_separator_bend_position=horizontal_separator_bend_position,
-  horizontal_separator_bend_angle=horizontal_separator_bend_angle,
-  horizontal_separator_bend_separation=horizontal_separator_bend_separation,
-  horizontal_separator_cut_depth=horizontal_separator_cut_depth,
-  horizontal_irregular_subdivisions=horizontal_irregular_subdivisions,
-  horizontal_separator_config=horizontal_separator_config, 
-  half_pitch=half_pitch,
-  lip_style=lip_style,
-  zClearance=zClearance,
-  box_corner_attachments_only=box_corner_attachments_only,
+  vertical_separator_bend_position = vertical_separator_bend_position,
+  vertical_separator_bend_angle = vertical_separator_bend_angle,
+  vertical_separator_bend_separation = vertical_separator_bend_separation,
+  vertical_separator_cut_depth = vertical_separator_cut_depth,
+  vertical_irregular_subdivisions = vertical_irregular_subdivisions,
+  vertical_separator_config = vertical_separator_config,
+  horizontal_chambers = horizontal_chambers,
+  horizontal_separator_bend_position = horizontal_separator_bend_position,
+  horizontal_separator_bend_angle = horizontal_separator_bend_angle,
+  horizontal_separator_bend_separation = horizontal_separator_bend_separation,
+  horizontal_separator_cut_depth = horizontal_separator_cut_depth,
+  horizontal_irregular_subdivisions = horizontal_irregular_subdivisions,
+  horizontal_separator_config = horizontal_separator_config,
+  half_pitch = half_pitch,
+  lip_style = lip_style,
+  zClearance = zClearance,
+  box_corner_attachments_only = box_corner_attachments_only,
   flat_base = flat_base,
-  spacer=spacer,
+  spacer = spacer,
   tapered_corner=tapered_corner,
   tapered_corner_size = tapered_corner_size,
   tapered_setback = tapered_setback,
-  wallpattern_enabled=wallpattern_enabled,
-  wallpattern_style=wallpattern_style,
-  wallpattern_walls=wallpattern_walls, 
-  wallpattern_dividers_enabled=wallpattern_dividers_enabled,
-  wallpattern_hole_sides=wallpattern_hole_sides,
-  wallpattern_hole_size=wallpattern_hole_size, 
-  wallpattern_hole_spacing=wallpattern_hole_spacing,
-  wallpattern_fill=wallpattern_fill,
-  wallpattern_voronoi_noise=wallpattern_voronoi_noise,
+  wallpattern_enabled = wallpattern_enabled,
+  wallpattern_style = wallpattern_style,
+  wallpattern_walls = wallpattern_walls,
+  wallpattern_dividers_enabled = wallpattern_dividers_enabled,
+  wallpattern_hole_sides = wallpattern_hole_sides,
+  wallpattern_hole_size = wallpattern_hole_size,
+  wallpattern_hole_spacing = wallpattern_hole_spacing,
+  wallpattern_fill = wallpattern_fill,
+  wallpattern_voronoi_noise = wallpattern_voronoi_noise,
   wallpattern_voronoi_radius = wallpattern_voronoi_radius,
-  wallcutout_enabled=wallcutout_enabled,
-  wallcutout_walls=wallcutout_walls,
-  wallcutout_width=wallcutout_width,
-  wallcutout_angle=wallcutout_angle,
-  wallcutout_height=wallcutout_height,
-  wallcutout_corner_radius=wallcutout_corner_radius,
-  extention_enabled=[extention_x_enabled,extention_y_enabled],
-  extention_tabs_enabled = extention_tabs_enabled,
+  wallcutout_enabled = wallcutout_enabled,
+  wallcutout_walls = wallcutout_walls,
+  wallcutout_width = wallcutout_width,
+  wallcutout_angle = wallcutout_angle,
+  wallcutout_height = wallcutout_height,
+  wallcutout_corner_radius = wallcutout_corner_radius,
+  extension_enabled = [extension_x_enabled,extension_y_enabled],
+  extension_tabs_enabled = extension_tabs_enabled,
   cutx=cutx,
   cuty=cuty,
   help=enable_help) {
-  
-  num_x = calcDimentionWidth(width);
-  num_y = calcDimentionDepth(depth);
-  num_z = calcDimentionHeight(height);
-  
+
+  num_x = calcDimensionWidth(width);
+  num_y = calcDimensionDepth(depth);
+  num_z = calcDimensionHeight(height);
+
   echo("gridfinity_tray", num_x=num_x, num_y=num_y, num_z=num_z);
-  
+
   difference() {
     /*<!!start gridfinity_basic_cup!!>*/
     gridfinity_cup(
-      width=width, depth=depth, height=height,
-      position=position,
-      filled_in=filled_in,
-      label_style=label_style,
-      label_position=label_position,
-      label_size=label_size,
-      label_relief=label_relief,
-      fingerslide=fingerslide,
-      fingerslide_radius=fingerslide_radius,
-      magnet_diameter=magnet_diameter,
-      screw_depth=screw_depth,
-      center_magnet_diameter=center_magnet_diameter,
-      center_magnet_thickness=center_magnet_thickness,
-      floor_thickness=floor_thickness,
-      cavity_floor_radius=cavity_floor_radius,
-      wall_thickness=wall_thickness,
-      hole_overhang_remedy=hole_overhang_remedy,
-      efficient_floor=efficient_floor,
-      chamber_wall_thickness=chamber_wall_thickness,
-      vertical_chambers = vertical_chambers,
-      vertical_separator_bend_position=vertical_separator_bend_position,
-      vertical_separator_bend_angle=vertical_separator_bend_angle,
-      vertical_separator_bend_separation=vertical_separator_bend_separation,
-      vertical_separator_cut_depth=vertical_separator_cut_depth,
-      vertical_irregular_subdivisions=vertical_irregular_subdivisions,
-      vertical_separator_config=vertical_separator_config,
-      horizontal_chambers=horizontal_chambers,
-      horizontal_separator_bend_position=horizontal_separator_bend_position,
-      horizontal_separator_bend_angle=horizontal_separator_bend_angle,
-      horizontal_separator_bend_separation=horizontal_separator_bend_separation,
-      horizontal_separator_cut_depth=horizontal_separator_cut_depth,
-      horizontal_irregular_subdivisions=horizontal_irregular_subdivisions,
-      horizontal_separator_config=horizontal_separator_config, 
-      half_pitch=half_pitch,
-      lip_style=lip_style,
-      zClearance=zClearance,
-      box_corner_attachments_only=box_corner_attachments_only,
-      flat_base = flat_base,
-      spacer=spacer,
-      tapered_corner=tapered_corner,
+      width = width, depth = depth, height = height,
+      position = position,
+      filled_in = filled_in,
+      label_style = label_style,
+      label_position = label_position,
+      label_size = label_size,
+      label_relief = label_relief,
+      fingerslide = fingerslide,
+      fingerslide_radius = fingerslide_radius,
+      magnet_diameter = magnet_diameter,
+      screw_depth = screw_depth,
+      center_magnet_diameter = center_magnet_diameter,
+      center_magnet_thickness = center_magnet_thickness,
+      floor_thickness = floor_thickness,
+      cavity_floor_radius = cavity_floor_radius,
+      wall_thickness = wall_thickness,
+      hole_overhang_remedy = hole_overhang_remedy,
+      efficient_floor = efficient_floor,
+      chamber_wall_thickness = chamber_wall_thickness,
+      vertical_chambers  =  vertical_chambers,
+      vertical_separator_bend_position = vertical_separator_bend_position,
+      vertical_separator_bend_angle = vertical_separator_bend_angle,
+      vertical_separator_bend_separation = vertical_separator_bend_separation,
+      vertical_separator_cut_depth = vertical_separator_cut_depth,
+      vertical_irregular_subdivisions = vertical_irregular_subdivisions,
+      vertical_separator_config = vertical_separator_config,
+      horizontal_chambers = horizontal_chambers,
+      horizontal_separator_bend_position = horizontal_separator_bend_position,
+      horizontal_separator_bend_angle = horizontal_separator_bend_angle,
+      horizontal_separator_bend_separation = horizontal_separator_bend_separation,
+      horizontal_separator_cut_depth = horizontal_separator_cut_depth,
+      horizontal_irregular_subdivisions = horizontal_irregular_subdivisions,
+      horizontal_separator_config = horizontal_separator_config,
+      half_pitch = half_pitch,
+      lip_style = lip_style,
+      zClearance = zClearance,
+      box_corner_attachments_only = box_corner_attachments_only,
+      flat_base  =  flat_base,
+      spacer = spacer,
+      tapered_corner = tapered_corner,
       tapered_corner_size = tapered_corner_size,
       tapered_setback = tapered_setback,
-      wallpattern_enabled=wallpattern_enabled,
-      wallpattern_style=wallpattern_style,
-      wallpattern_walls=wallpattern_walls, 
-      wallpattern_dividers_enabled=wallpattern_dividers_enabled,
-      wallpattern_hole_sides=wallpattern_hole_sides,
-      wallpattern_hole_size=wallpattern_hole_size, 
-      wallpattern_hole_spacing=wallpattern_hole_spacing,
-      wallpattern_fill=wallpattern_fill,
-      wallpattern_voronoi_noise=wallpattern_voronoi_noise,
+      wallpattern_enabled = wallpattern_enabled,
+      wallpattern_style = wallpattern_style,
+      wallpattern_walls = wallpattern_walls,
+      wallpattern_dividers_enabled = wallpattern_dividers_enabled,
+      wallpattern_hole_sides = wallpattern_hole_sides,
+      wallpattern_hole_size = wallpattern_hole_size,
+      wallpattern_hole_spacing = wallpattern_hole_spacing,
+      wallpattern_fill = wallpattern_fill,
+      wallpattern_voronoi_noise = wallpattern_voronoi_noise,
       wallpattern_voronoi_radius = wallpattern_voronoi_radius,
-      wallcutout_enabled=wallcutout_enabled,
-      wallcutout_walls=wallcutout_walls,
-      wallcutout_width=wallcutout_width,
-      wallcutout_angle=wallcutout_angle,
-      wallcutout_height=wallcutout_height,
-      wallcutout_corner_radius=wallcutout_corner_radius,
-      extention_enabled=[extention_x_enabled,extention_y_enabled],
-      extention_tabs_enabled = extention_tabs_enabled,
-      cutx=cutx,
-      cuty=cuty,
+      wallcutout_enabled = wallcutout_enabled,
+      wallcutout_walls = wallcutout_walls,
+      wallcutout_width = wallcutout_width,
+      wallcutout_angle = wallcutout_angle,
+      wallcutout_height = wallcutout_height,
+      wallcutout_corner_radius = wallcutout_corner_radius,
+      extension_enabled = [extension_x_enabled,extension_y_enabled],
+      extension_tabs_enabled = extension_tabs_enabled,
+      cutx = cutx,
+      cuty = cuty,
       help = help);
     /*<!!end gridfinity_basic_cup!!>*/
 
@@ -405,24 +405,24 @@ module gridfinity_tray(
     tray(
       num_x = num_x,
       num_y = num_y,
-      num_z = num_z, 
+      num_z = num_z,
       floorThickness = floor_thickness,
       wallThickness = wall_thickness,
       spacing = tray_spacing,
-      cornerRadius = tray_corner_radius, 
-      trayZpos = tray_zpos, 
+      cornerRadius = tray_corner_radius,
+      trayZpos = tray_zpos,
       baseHeight = cupBaseClearanceHeight(magnet_diameter, screw_depth),
       verticalCompartments = tray_vertical_compartments,
       horizontalCompartments = tray_horizontal_compartments,
       customCompartments = tray_custom_compartments);
-      
-      //This seems like a complciated way to do this, but it guarantees order will be correct.
+
+      //This seems like a complicated way to do this, but it guarantees order will be correct.
       configArray = [
-        [ixpos, 0], 
-        [iypos, 0], 
-        [ixsize, num_z], 
-        [iysize, num_x], 
-        [icornerradius, tray_corner_radius], 
+        [ixpos, 0],
+        [iypos, 0],
+        [ixsize, num_z],
+        [iysize, num_x],
+        [icornerradius, tray_corner_radius],
         [idepth, num_z]];
 
       echo(outputCustomConfig("tray", replace_Items(configArray, [])));

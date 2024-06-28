@@ -20,7 +20,7 @@ depth = [1, 0]; //0.5
 // Z dimension excluding. grid units (multiples of 7mm) or mm.
 height = [3, 0]; //0.1
 // Fill in solid block (overrides all following options)
-filled_in = false; 
+filled_in = false;
 // Wall thickness of outer walls. default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
 wall_thickness = 0;  // .01
 // Remove some or all of lip
@@ -50,7 +50,7 @@ vertical_separator_config = "10.5|21|42|50|60";
 horizontal_irregular_subdivisions = false;
 // Separator positions are defined in terms of grid units from the left end
 horizontal_separator_config = "10.5|21|42|50|60";
-      
+
 /* [Base] */
 // (Zack's design uses magnet diameter of 6.5)
 magnet_diameter = 0;  // .1
@@ -66,7 +66,7 @@ box_corner_attachments_only = true;
 floor_thickness = 0.7;
 cavity_floor_radius = -1;// .1
 // Efficient floor option saves material and time, but the internal floor is not flat
-efficient_floor = "off";//[off,on,rounded,smooth] 
+efficient_floor = "off";//[off,on,rounded,smooth]
 // Enable to subdivide bottom pads to allow half-cell offsets
 half_pitch = false;
 // Removes the internal grid from base the shape
@@ -78,7 +78,7 @@ spacer = false;
 label_style = "normal"; //[disabled: no label, normal:normal, click]
 // Include overhang for labeling (and specify left/right/center justification)
 label_position = "left"; // [left, right, center, leftchamber, rightchamber, centerchamber]
-// Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4. 
+// Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4.
 label_size = [0,14,0,0.6]; // 0.01
 // Creates space so the attached label wont interferr with stacking
 label_relief = 0; // 0.1
@@ -113,9 +113,9 @@ wallpattern_style = "grid"; //[grid, hexgrid, voronoi,voronoigrid,voronoihexgrid
 // Spacing between pattern
 wallpattern_hole_spacing = 2; //0.1
 // wall to enable on, front, back, left, right.
-wallpattern_walls=[1,1,1,1]; 
+wallpattern_walls=[1,1,1,1];
 // Add the pattern to the dividers
-wallpattern_dividers_enabled="disabled"; //[disabled, horizontal, vertical, both] 
+wallpattern_dividers_enabled="disabled"; //[disabled, horizontal, vertical, both]
 //Number of sides of the hole op
 wallpattern_hole_sides = 6; //[4:square, 6:Hex, 64:circle]
 //Size of the hole
@@ -137,9 +137,9 @@ wallcutout_height=0;
 wallcutout_corner_radius=5;
 
 /* [Extendable] */
-extention_x_enabled = false;
-extention_y_enabled = false;
-extention_tabs_enabled = true;
+extension_x_enabled = false;
+extension_y_enabled = false;
+extension_tabs_enabled = true;
 
 /* [debug] */
 //Slice along the x axis
@@ -186,7 +186,7 @@ gridfinity_cup(
   horizontal_separator_bend_separation=horizontal_separator_bend_separation,
   horizontal_separator_cut_depth=horizontal_separator_cut_depth,
   horizontal_irregular_subdivisions=horizontal_irregular_subdivisions,
-  horizontal_separator_config=horizontal_separator_config, 
+  horizontal_separator_config=horizontal_separator_config,
   half_pitch=half_pitch,
   lip_style=lip_style,
   zClearance=zClearance,
@@ -198,10 +198,10 @@ gridfinity_cup(
   tapered_setback = tapered_setback,
   wallpattern_enabled=wallpattern_enabled,
   wallpattern_style=wallpattern_style,
-  wallpattern_walls=wallpattern_walls, 
+  wallpattern_walls=wallpattern_walls,
   wallpattern_dividers_enabled=wallpattern_dividers_enabled,
   wallpattern_hole_sides=wallpattern_hole_sides,
-  wallpattern_hole_size=wallpattern_hole_size, 
+  wallpattern_hole_size=wallpattern_hole_size,
   wallpattern_hole_spacing=wallpattern_hole_spacing,
   wallpattern_fill=wallpattern_fill,
   wallpattern_voronoi_noise=wallpattern_voronoi_noise,
@@ -212,12 +212,12 @@ gridfinity_cup(
   wallcutout_angle=wallcutout_angle,
   wallcutout_height=wallcutout_height,
   wallcutout_corner_radius=wallcutout_corner_radius,
-  extention_enabled=[extention_x_enabled,extention_y_enabled],
-  extention_tabs_enabled = extention_tabs_enabled,
-  sliding_lid_enabled = sliding_lid_enabled, 
-  sliding_lid_thickness = sliding_lid_thickness, 
-  sliding_min_wall_thickness = sliding_min_wallThickness, 
-  sliding_min_support = sliding_min_support, 
+  extension_enabled=[extension_x_enabled,extension_y_enabled],
+  extension_tabs_enabled = extension_tabs_enabled,
+  sliding_lid_enabled = sliding_lid_enabled,
+  sliding_lid_thickness = sliding_lid_thickness,
+  sliding_min_wall_thickness = sliding_min_wallThickness,
+  sliding_min_support = sliding_min_support,
   sliding_clearance = sliding_clearance,
   cutx=cutx,
   cuty=cuty,

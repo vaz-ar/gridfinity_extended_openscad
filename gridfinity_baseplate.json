@@ -7,7 +7,7 @@
             "Butterfly_Clip_Only": "false",
             "Butterfly_Clip_Radius": "0.10000000000000001",
             "Butterfly_Clip_Size": "[6, 6, 1.5]",
-            "Butterfly_Clip_Tollerance": "0.10000000000000001",
+            "Butterfly_Clip_Tolerance": "0.10000000000000001",
             "Custom_Grid_Enabled": "false",
             "Depth": "1",
             "Filament_Clip_Diameter": "2",

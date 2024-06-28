@@ -20,6 +20,6 @@ module glue_stick_cup(num_x=1, num_y=1, num_z=2) {
 module glue_stick(num_z=5, diam) {
   floor_thickness = blocks_needed > 1 ? 5.5 : 1.2;
   translate([0, 0, floor_thickness]) cylinder(h=num_z*gridfinity_zpitch, d=diam);
-  translate([0, 0, (num_z - easement_z)*gridfinity_zpitch + 1.2]) 
+  translate([0, 0, (num_z - easement_z)*gridfinity_zpitch + 1.2])
     cylinder(h=easement_z*gridfinity_zpitch, d1=diam, d2=diam*1.1);
 }

@@ -7,30 +7,30 @@ use <modules/gridfinity_modules.scad>
 /*<!!start gridfinity_sieve!!>*/
 
 // Should the grid be square or hex
-sieve_grid_style = "hex"; //["square","hex","auto"]
-//Spacing around the holes
-sieve_hole_spacing = 3; //0.1
-// 45 deg chamfer added to the top of the hole (mm)
-sieve_hole_chamfer = 0; //0.5
+sieve_grid_style = "hex"; // ["square", "hex", "auto"]
+// Spacing around the holes
+sieve_hole_spacing = 3; // 0.1
+// 45 degrees chamfer added to the top of the hole (mm)
+sieve_hole_chamfer = 0; // 0.5
 // The number of sides for the hole, when custom is selected
-sieve_hole_sides = 6; 
+sieve_hole_sides = 6;
 // The size the hole, when custom is selected
-sieve_hole_size = [10, 10]; //0.1
+sieve_hole_size = [10, 10]; // 0.1
 // Spacing around the compartments
-sieve_compartment_clearance= 7; //0.1
+sieve_compartment_clearance= 7; // 0.1
 // Center the holes within the compartments
-sieve_compartment_centered = true; //0.1
-sieve_compartment_fill = "none"; //["none", "space", "crop"]
+sieve_compartment_centered = true; // 0.1
+sieve_compartment_fill = "none"; // ["none", "space", "crop"]
 /*<!!end gridfinity_sieve!!>*/
 
 /*<!!start gridfinity_basic_cup!!>*/
 /* [General Cup] */
 // X dimension. grid units (multiples of 42mm) or mm.
-width = [2, 0]; //0.5
+width = [2, 0]; // 0.5
 // Y dimension. grid units (multiples of 42mm) or mm.
-depth = [1, 0]; //0.5
+depth = [1, 0]; // 0.5
 // Z dimension excluding. grid units (multiples of 7mm) or mm.
-height = [3, 0]; //0.1
+height = [3, 0]; // 0.1
 // Wall thickness of outer walls. default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
 wall_thickness = 0;  // .01
 // Remove some or all of lip
@@ -38,14 +38,14 @@ lip_style = "normal";  // [ normal, reduced, minimum, none:not stackable ]
 position = "center"; //[default",center,zero]
 //under size the bin top by this amount to allow for better stacking
 zClearance = 0; // 0.1
-      
+
 /* [Base] */
 // (Zack's design uses magnet diameter of 6.5)
 // Minimum thickness above cutouts in base (Zack's design is effectively 1.2)
 floor_thickness = 2;
 cavity_floor_radius = -1;// .1
 // Efficient floor option saves material and time, but the internal floor is not flat
-efficient_floor = "smooth";//[off,on,rounded,smooth] 
+efficient_floor = "smooth";//[off,on,rounded,smooth]
 // Removes the internal grid from base the shape
 flat_base = true;
 
@@ -53,17 +53,17 @@ flat_base = true;
 label_style = "disabled"; //[disabled: no label, normal:normal, click]
 // Include overhang for labeling (and specify left/right/center justification)
 label_position = "left"; // [left, right, center, leftchamber, rightchamber, centerchamber]
-// Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4. 
+// Width, Depth, Height, Radius. Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4.
 label_size = [0,14,0,0.6]; // 0.01
-// Creates space so the attached label wont interferr with stacking
+// Creates space so the attached label won't interfere with stacking
 label_relief = 0; // 0.1
 
 /* [debug] */
-//Slice along the x axis
+// Slice along the x axis
 cutx = 0; //0.1
-//Slice along the y axis
+// Slice along the y axis
 cuty = 0; //0.1
-// enable loging of help messages during render.
+// Enable logging of help messages during render.
 enable_help = false;
 /*<!!end gridfinity_basic_cup!!>*/
 
@@ -86,7 +86,7 @@ module gridfinity_sieve(
   sieve_compartment_centered = sieve_compartment_centered,
   sieve_compartment_clearance = sieve_compartment_clearance,
   sieve_compartment_fill  = sieve_compartment_fill,
-    
+
   //gridfinity settings
   width=width, depth=depth, height=height,
   position=position,
@@ -102,12 +102,12 @@ module gridfinity_sieve(
   cutx=cutx,
   cuty=cuty,
   help=help) {
-  
+
   difference() {
-    num_x = calcDimentionWidth(width);
-    num_y = calcDimentionDepth(depth);
-    num_z = calcDimentionHeight(height);
-    
+    num_x = calcDimensionWidth(width);
+    num_y = calcDimensionDepth(depth);
+    num_z = calcDimensionHeight(height);
+
     holeSize = is_list(sieve_hole_size) ? sieve_hole_size : [sieve_hole_size,sieve_hole_size];
     /*<!!start gridfinity_basic_cup!!>*/
     gridfinity_cup(

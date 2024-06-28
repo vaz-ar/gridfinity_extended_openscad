@@ -13,7 +13,7 @@ default_depth = [1, 0]; //0.1
 default_height = [3, 0]; //0.1
 
 default_position="default"; //["default","center","zero"]
-default_filled_in = false; 
+default_filled_in = false;
 // Might want to remove inner lip of cup
 default_lip_style = "normal"; //[normal, reduced, minimum, none]
 
@@ -30,7 +30,7 @@ default_zClearance = 0; // 0.1
 default_label_style = "normal"; //[disabled: no label, normal:normal, click]
 
 default_label_position = "disabled"; //[left: left aligned label, right: right aligned label, center: center aligned label, leftchamber: left aligned chamber label, rightchamber: right aligned chamber label, centerchamber: center aligned chamber label]
-// Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4. 
+// Width in Gridfinity units of 42mm, Depth and Height in mm, radius in mm. Width of 0 uses full width. Height of 0 uses Depth, height of -1 uses depth*3/4.
 default_label_size = [0,14,0,0.6]; // 0.01
 // Creates space so the attached label wont interferr with stacking
 default_label_relief = 0; // 0.1
@@ -86,7 +86,7 @@ default_cavity_floor_radius = -1;
 // Sequential Bridging hole overhang remedy is active only when both screws and magnets are nonzero (and this option is selected)
 default_hole_overhang_remedy = 2;
 // Save material with thinner floor
-default_efficient_floor = "off";//["off","on","rounded","smooth"] 
+default_efficient_floor = "off";//["off","on","rounded","smooth"]
 // Remove floor to create a spacer
 default_spacer = false;
 // Half-pitch base pads for offset stacking
@@ -113,11 +113,11 @@ default_wallcutout_height=0; //0.1
 default_wallcutout_corner_radius=5;
 
 /* [Wall Pattern] */
-default_wallpattern_enabled=false; 
+default_wallpattern_enabled=false;
 default_wallpattern_style = "grid"; //["grid", "hexgrid", "voronoi","voronoigrid","voronoihexgrid"]
-default_wallpattern_dividers_enabled ="disabled"; //["disabled", "horizontal", "vertical", "both"] 
+default_wallpattern_dividers_enabled ="disabled"; //["disabled", "horizontal", "vertical", "both"]
 default_wallpattern_fill = "none"; //["none", "space", "crop", "crophorizontal", "cropvertical", "crophorizontal_spacevertical", "cropvertical_spacehorizontal", "spacevertical", "spacehorizontal"]
-default_wallpattern_walls=[1,0,0,0]; 
+default_wallpattern_walls=[1,0,0,0];
 default_wallpattern_hole_sides = 6;
 default_wallpattern_hole_size = 10; //0.1
 default_wallpattern_hole_spacing = 2; //0.1
@@ -125,9 +125,9 @@ default_wallpattern_voronoi_noise = 0.75;
 default_wallpattern_voronoi_radius = 0.5;
 
 /* [Extendable] */
-default_extention_x_enabled = false;
-default_extention_y_enabled = false;
-default_extention_tabs_enabled = true;
+default_extension_x_enabled = false;
+default_extension_y_enabled = false;
+default_extension_tabs_enabled = true;
 //Tab size, height, width, thickness, style. width default is height, thickness default is 1.4, style {0,1,2}.
 default_extention_tab_size= [10,0,0,0]; //0.1
 
@@ -140,7 +140,7 @@ module end_of_customizer_opts() {}
 
 gridfinity_cup();//execution point
 
-// It's recommended that all parameters other than x, y, z size should be specified by keyword 
+// It's recommended that all parameters other than x, y, z size should be specified by keyword
 // and not by position.  The number of parameters makes positional parameters error prone, and
 // additional parameters may be added over time and break things.
 // separator positions are defined in units from the left side
@@ -195,7 +195,7 @@ module gridfinity_cup(
   wallpattern_enabled=default_wallpattern_enabled,
   wallpattern_style=default_wallpattern_style,
   wallpattern_fill=default_wallpattern_fill,
-  wallpattern_walls=default_wallpattern_walls, 
+  wallpattern_walls=default_wallpattern_walls,
   wallpattern_dividers_enabled = default_wallpattern_dividers_enabled,
   wallpattern_hole_sides=default_wallpattern_hole_sides,
   wallpattern_hole_size=default_wallpattern_hole_size,
@@ -208,86 +208,86 @@ module gridfinity_cup(
   wallcutout_angle=default_wallcutout_angle,
   wallcutout_height=default_wallcutout_height,
   wallcutout_corner_radius=default_wallcutout_corner_radius,
-  extention_enabled=[default_extention_x_enabled,default_extention_y_enabled],
-  extention_tabs_enabled=default_extention_tabs_enabled,
+  extension_enabled=[default_extension_x_enabled,default_extension_y_enabled],
+  extension_tabs_enabled=default_extension_tabs_enabled,
   extention_tab_size=default_extention_tab_size,
-  sliding_lid_enabled = default_sliding_lid_enabled, 
-  sliding_lid_thickness = default_sliding_lid_thickness, 
-  sliding_min_wall_thickness = default_sliding_min_wallThickness, 
-  sliding_min_support = default_sliding_min_support, 
+  sliding_lid_enabled = default_sliding_lid_enabled,
+  sliding_lid_thickness = default_sliding_lid_thickness,
+  sliding_min_wall_thickness = default_sliding_min_wallThickness,
+  sliding_min_support = default_sliding_min_support,
   sliding_clearance = default_sliding_clearance,
   cutx=default_cutx,
   cuty=default_cuty,
   help) {
-  
-  num_x = calcDimentionWidth(width);
-  num_y = calcDimentionDepth(depth);
-  num_z = calcDimentionHeight(height);
 
-  vertical_separator_positions = vertical_irregular_subdivisions 
-    ? vertical_separator_config 
+  num_x = calcDimensionWidth(width);
+  num_y = calcDimensionDepth(depth);
+  num_z = calcDimensionHeight(height);
+
+  vertical_separator_positions = vertical_irregular_subdivisions
+    ? vertical_separator_config
     : splitChamber(vertical_chambers-1, num_x);
-  horizontal_separator_positions=horizontal_irregular_subdivisions 
-    ? horizontal_separator_config 
+  horizontal_separator_positions=horizontal_irregular_subdivisions
+    ? horizontal_separator_config
     : splitChamber(horizontal_chambers-1, num_y);
 
   $gfc=[["num_x",num_x],["num_y",num_y],["num_z",num_z],["vertical_separator_positions",vertical_separator_positions],["horizontal_separator_positions",horizontal_separator_positions]];
 
-     
+
   //Correct legacy values, values that used to work one way but were then changed.
   wallpattern_dividers_enabled = is_bool(wallpattern_dividers_enabled)
     ? wallpattern_dividers_enabled ? "vertical" : "disabled"
     : wallpattern_dividers_enabled;
-  
+
   //If efficient_floor disable the base magnets and screws
   center_magnet_thickness = efficient_floor != "off" ? 0 : center_magnet_thickness;
   center_magnet_diameter = efficient_floor != "off" ? 0 : center_magnet_diameter;
   //fingerslide = efficient_floor ? "none" : fingerslide;
   cavity_floor_radius = efficient_floor != "off" ? 0 : cavity_floor_radius;
-  
+
   //wall_thickness default, height < 8 0.95, height < 16 1.2, height > 16 1.6 (Zack's design is 0.95 mm)
   wall_thickness = wallThickness(wall_thickness, num_z);
-  
+
   slidingLidSettings= SlidingLidSettings(
-          sliding_lid_enabled, 
-          sliding_lid_thickness, 
-          sliding_min_wall_thickness, 
+          sliding_lid_enabled,
+          sliding_lid_thickness,
+          sliding_min_wall_thickness,
           sliding_min_support,
           sliding_clearance,
           wall_thickness);
-          
+
   zClearance = zClearance + (sliding_lid_enabled ? slidingLidSettings[iSlidingLidThickness] : 0);
-  
+
   translate(cupPosition(position,num_x,num_y))
   union(){
   difference() {
     grid_block(
-      num_x, num_y, num_z, 
-      magnet_diameter, 
-      screw_depth, 
+      num_x, num_y, num_z,
+      magnet_diameter,
+      screw_depth,
       center_magnet_diameter = center_magnet_diameter,
       center_magnet_thickness = center_magnet_thickness,
-      hole_overhang_remedy=hole_overhang_remedy, 
+      hole_overhang_remedy=hole_overhang_remedy,
       half_pitch=half_pitch,
-      box_corner_attachments_only=box_corner_attachments_only, 
+      box_corner_attachments_only=box_corner_attachments_only,
       stackable = lip_style != "none",
       flat_base=flat_base);
-      
-    if(!filled_in) 
+
+    if(!filled_in)
     union(){
       partitioned_cavity(
-        num_x, num_y, num_z, 
+        num_x, num_y, num_z,
         label_style=label_style,
         label_position=label_position,
         label_size=label_size,
         label_relief=label_relief,
-        fingerslide=fingerslide, 
-        fingerslide_radius=fingerslide_radius, 
-        magnet_diameter=magnet_diameter, 
-        screw_depth=screw_depth, 
-        floor_thickness=floor_thickness, 
+        fingerslide=fingerslide,
+        fingerslide_radius=fingerslide_radius,
+        magnet_diameter=magnet_diameter,
+        screw_depth=screw_depth,
+        floor_thickness=floor_thickness,
         wall_thickness=wall_thickness,
-        efficient_floor=efficient_floor, 
+        efficient_floor=efficient_floor,
         half_pitch=half_pitch,
         chamber_wall_thickness=chamber_wall_thickness,
         chamber_wall_zClearance=chamber_wall_zClearance,
@@ -301,7 +301,7 @@ module gridfinity_cup(
         horizontal_separator_cut_depth = horizontal_separator_cut_depth,
         vertical_separator_positions = vertical_separator_positions,
         horizontal_separator_positions = horizontal_separator_positions,
-        lip_style=lip_style, 
+        lip_style=lip_style,
         zClearance=zClearance,
         flat_base=flat_base,
         spacer=spacer,
@@ -309,7 +309,7 @@ module gridfinity_cup(
         box_corner_attachments_only = box_corner_attachments_only,
         sliding_lid_settings= slidingLidSettings
         );
-    
+
     color(color_wallcutout)
       union(){
         floorHeight = calculateFloorHeight(magnet_diameter, screw_depth, floor_thickness);
@@ -318,15 +318,15 @@ module gridfinity_cup(
         cutoutclearance = gf_cup_corner_radius/2;
 
         tapered_setback = tapered_setback < 0 ? gf_cup_corner_radius : tapered_setback;
-        tapered_corner_size = 
+        tapered_corner_size =
               tapered_corner_size == -2 ? (wallTop - floorHeight)/2
             : tapered_corner_size < 0 ? wallTop - floorHeight //meant for -1, but also catch others
             : tapered_corner_size == 0 ? wallTop - floorHeight - cavityFloorRadius
             : tapered_corner_size;
-            
+
         //This could be more sprcific based on the base height, and the lip style.
         wallcutout_thickness = wall_thickness*2+max(wall_thickness*2,cavityFloorRadius);//wall_thickness*2 should be lip thickness
-        wallcutout_hgt = wallcutout_height < 0 
+        wallcutout_hgt = wallcutout_height < 0
             ? (wallTop - floorHeight)/abs(wallcutout_height)
             : wallcutout_height == 0 ? wallTop - floorHeight -cavityFloorRadius
             : wallcutout_height;
@@ -345,7 +345,7 @@ module gridfinity_cup(
           [(num_x-0.5)*gf_pitch-wallcutout_thickness/2-gf_tolerance/2+fudgeFactor, wallCutoutPosition_mm(wallcutout_walls[3],num_y), wallTop],
           num_y*gf_pitch/3,
           [0,0,90]];
-        
+
         wallcutout_locations = [wallcutout_front, wallcutout_back, wallcutout_left, wallcutout_right];
         echo("wallcutout_hgt", wallcutout_hgt=wallcutout_hgt);
         if(tapered_corner == "rounded" || tapered_corner == "chamfered"){
@@ -358,19 +358,19 @@ module gridfinity_cup(
           union(){
             if(tapered_corner == "rounded"){
               roundedCorner(
-                radius = tapered_corner_size, 
-                length=(num_x+1)*gf_pitch, 
+                radius = tapered_corner_size,
+                length=(num_x+1)*gf_pitch,
                 height = tapered_corner_size);
             }
             else if(tapered_corner == "chamfered"){
               chamferedCorner(
-                chamferLength = tapered_corner_size, 
-                length=(num_x+1)*gf_pitch, 
+                chamferLength = tapered_corner_size,
+                length=(num_x+1)*gf_pitch,
                 height = tapered_corner_size);
             }
           }
         }
-        
+
         if(wallcutout_enabled){
           for(i = [0:1:len(wallcutout_locations)-1])
           {
@@ -387,20 +387,20 @@ module gridfinity_cup(
             }
           }
         }
-        
+
         if(wallpattern_enabled){
           wallpattern_thickness = wall_thickness*2;
           border = wall_thickness;
           wallpatternzpos = floorHeight+max(cavityFloorRadius,border);
-          
+
           //I feel this should use wallTop, but it seems to work...
           heightz = gf_zpitch*(num_z)-wallpatternzpos + (
             //Position specific to each LIP style
             lip_style == "reduced" ? 0.6 :
-            lip_style == "minimum" ? 3 -border*2 
+            lip_style == "minimum" ? 3 -border*2
              : -gf_lip_height-1.8);
           z=wallpatternzpos+heightz/2;
-          
+
           front = [
             //width,height
             [num_x*gf_pitch-gf_cup_corner_radius*2-wallpattern_thickness,heightz],
@@ -421,26 +421,26 @@ module gridfinity_cup(
             [num_y*gf_pitch-gf_cup_corner_radius*2-wallpattern_thickness,heightz],
             [(num_x-0.5)*gf_pitch-wallpattern_thickness, (num_y-1)*gf_pitch/2, z],
             [90,90,90]];
-        
+
         locations = [front, back, left, right];
-          
-          
-        //["disabled", "horizontal", "vertical", "both"] 
+
+
+        //["disabled", "horizontal", "vertical", "both"]
         if(wallpattern_dividers_enabled != "disabled"){
           //TODO wall patterns only support the simple dividers
           difference(){
             union(){
               if(wallpattern_dividers_enabled == "vertical" || wallpattern_dividers_enabled == "both"){
-                //Based on the wall positions, get the left wall           
+                //Based on the wall positions, get the left wall
                 dividerLocation = locations[2];
                 separator_positions = calculateSeparators(vertical_separator_positions);
 
                 if(len(separator_positions)>0)
                 {
-                  //Add wall pattern to the separators 
+                  //Add wall pattern to the separators
                   for (i=[0:len(separator_positions)-1]) {
                     union(){
-                    translate([(separator_positions[i])-chamber_wall_thickness, 0, fudgeFactor]) 
+                    translate([(separator_positions[i])-chamber_wall_thickness, 0, fudgeFactor])
                     translate(dividerLocation[1])
                     rotate(dividerLocation[2])
                     render(){
@@ -463,15 +463,15 @@ module gridfinity_cup(
                 }
               }
               if(wallpattern_dividers_enabled == "horizontal" || wallpattern_dividers_enabled == "both"){
-                //Based on the wall positions, get the left wall           
+                //Based on the wall positions, get the left wall
                 dividerLocation = locations[0];
                 separator_positions = calculateSeparators(horizontal_separator_positions);
                 if(len(separator_positions)>0)
                 {
-                  //Add wall pattern to the separators 
+                  //Add wall pattern to the separators
                   for (i=[0:len(separator_positions)-1]) {
                     union(){
-                    translate([0, (separator_positions[i])-chamber_wall_thickness, fudgeFactor]) 
+                    translate([0, (separator_positions[i])-chamber_wall_thickness, fudgeFactor])
                     translate(dividerLocation[1])
                     rotate(dividerLocation[2])
                     render(){
@@ -505,14 +505,14 @@ module gridfinity_cup(
                 union(){
                   if(tapered_corner == "rounded"){
                     roundedCorner(
-                      radius = tapered_corner_size-cutoutclearance, 
-                      length=(num_x+1)*gf_pitch, 
+                      radius = tapered_corner_size-cutoutclearance,
+                      length=(num_x+1)*gf_pitch,
                       height = tapered_corner_size);
                   }
                   else if(tapered_corner == "chamfered"){
                     chamferedCorner(
-                      chamferLength = tapered_corner_size-cutoutclearance, 
-                      length=(num_x+1)*gf_pitch, 
+                      chamferLength = tapered_corner_size-cutoutclearance,
+                      length=(num_x+1)*gf_pitch,
                       height = tapered_corner_size);
                   }
                 }
@@ -545,11 +545,11 @@ module gridfinity_cup(
                 }
               }
             }
-          
+
             //subtract dividers from wall pattern
             sepFloorHeight = (efficient_floor != "off" ? floor_thickness : floorHeight);
             translate([-gf_pitch/2, -gf_pitch/2, sepFloorHeight-fudgeFactor])
-            separators(  
+            separators(
               length=gf_pitch*num_y,
               height=gf_zpitch*(num_z)-sepFloorHeight+border*2+fudgeFactor*2,
               wall_thickness = chamber_wall_thickness+cutoutclearance*2,
@@ -561,7 +561,7 @@ module gridfinity_cup(
 
             translate([gf_pitch*num_x-gf_pitch/2, -gf_pitch/2, sepFloorHeight-fudgeFactor])
             rotate([0,0,90])
-            separators(  
+            separators(
               length=gf_pitch*num_x,
               height=gf_zpitch*(num_z)-sepFloorHeight+border*2+fudgeFactor*2,
               wall_thickness = chamber_wall_thickness+cutoutclearance*2,
@@ -588,7 +588,7 @@ module gridfinity_cup(
                 }
               }
             }
-          
+
             //Subtract setback from wall pattern
             if(tapered_corner == "rounded" || tapered_corner == "chamfered"){
               //tapered_corner_size = tapered_corner_size == 0 ? gf_zpitch*num_z/2 : tapered_corner_size;
@@ -600,14 +600,14 @@ module gridfinity_cup(
               union(){
                 if(tapered_corner == "rounded"){
                   roundedCorner(
-                    radius = tapered_corner_size-cutoutclearance, 
-                    length=(num_x+1)*gf_pitch, 
+                    radius = tapered_corner_size-cutoutclearance,
+                    length=(num_x+1)*gf_pitch,
                     height = tapered_corner_size);
                 }
                 else if(tapered_corner == "chamfered"){
                   chamferedCorner(
-                    chamferLength = tapered_corner_size-cutoutclearance, 
-                    length=(num_x+1)*gf_pitch, 
+                    chamferLength = tapered_corner_size-cutoutclearance,
+                    length=(num_x+1)*gf_pitch,
                     height = tapered_corner_size);
                 }
               }
@@ -616,20 +616,20 @@ module gridfinity_cup(
         }
       }
     }
-   
-    if(extention_enabled.x){
+
+    if(extension_enabled.x){
      cutx = 0.5;
      color(color_wallcutout)
       translate([-gf_pitch*0.5,-gf_pitch*0.5,-fudgeFactor])
         cube([gf_pitch*cutx,num_y*gf_pitch,(num_z+1)*gf_zpitch]);
     }
-    if(extention_enabled.y){
+    if(extension_enabled.y){
      cuty = 0.5;
      color(color_wallcutout)
       translate([-gf_pitch*0.5,-gf_pitch*0.5,-fudgeFactor])
         cube([gf_pitch*num_x,gf_pitch*cuty,(num_z+1)*gf_zpitch]);
     }
-    
+
     if(cutx > 0 && $preview){
       color(color_cut)
       translate([-gf_pitch*0.5,-gf_pitch*0.5,-fudgeFactor])
@@ -641,26 +641,26 @@ module gridfinity_cup(
         cube([num_x*gf_pitch,gf_pitch*cuty,(num_z+1)*gf_zpitch]);
     }
   }
-  
-  if((extention_enabled.x || extention_enabled.y) && extention_tabs_enabled){
+
+  if((extension_enabled.x || extension_enabled.y) && extension_tabs_enabled){
     refTabHeight = extention_tab_size.x;
     tabThickness = extention_tab_size.z == 0 ? 1.4 : extention_tab_size.z;//1.4; //This should be calculated
     tabWidth = extention_tab_size.y;
     tabStyle = extention_tab_size[3];
-    
+
     floorHeight = calculateFloorHeight(magnet_diameter, screw_depth, floor_thickness) + calcualteCavityFloorRadius(cavity_floor_radius, wall_thickness,efficient_floor)-tabThickness;
-    
-    
+
+
     //todo need to correct this
     lipheight = lip_style == "none" ? tabThickness
       : lip_style == "reduced" ? gf_lip_upper_taper_height+tabThickness
       //Add tabThickness, as the taper can bleed in to the lip
       : gf_lip_upper_taper_height + gf_lip_lower_taper_height-tabThickness;
     ceilingHeight = gf_zpitch*num_z-zClearance-lipheight;
-  
+
     //tabWorkingheight = (num_z-1)*gf_zpitch-gf_Lip_Height;
     tabWorkingheight = ceilingHeight-floorHeight;
-  
+
     tabsCount = max(floor(tabWorkingheight/refTabHeight),1);
     tabHeight = tabWorkingheight/tabsCount;
     echo("tabs", binHeight =num_z, tabHeight=tabHeight, floorHeight=floorHeight, cavity_floor_radius=cavity_floor_radius, tabThickness=tabThickness);
@@ -669,29 +669,29 @@ module gridfinity_cup(
     {
       isOdd =  i % 2;
       echo("tabs", i=i, isOdd=isOdd)
-      if(extention_enabled.x){
+      if(extension_enabled.x){
         if(!isOdd)
         {
           translate([0,(num_y-0.5)*gf_pitch-wall_thickness-gf_tolerance/2,floorHeight+(i+0.5)*tabHeight])
           rotate([0,180,90])
             attachement_clip(height=tabHeight, width=tabWidth, thickness=tabThickness, tabStyle=tabStyle);
         } else {
-           if(!extention_enabled.y){
+           if(!extension_enabled.y){
             translate([0,-0.5*gf_pitch+wall_thickness+gf_tolerance/2,floorHeight+(i+0.5)*tabHeight])
               rotate([0,0,90])
               attachement_clip(height=tabHeight, width=tabWidth, thickness=tabThickness, tabStyle=tabStyle);
-          } 
+          }
         }
       }
 
-      if(extention_enabled.y){     
+      if(extension_enabled.y){
         if(isOdd)
         {
           translate([(num_x-0.5)*gf_pitch-wall_thickness-gf_tolerance/2,0,floorHeight+(i+0.5)*tabHeight])
           rotate([0,0,180])
             attachement_clip(height=tabHeight, width=tabWidth, thickness=tabThickness, tabStyle=tabStyle);
         } else {
-          if(!extention_enabled.x){
+          if(!extension_enabled.x){
             translate([-0.5*gf_pitch+wall_thickness+gf_tolerance/2,0,floorHeight+(i+0.5)*tabHeight])
               rotate([0,180,180])
               attachement_clip(height=tabHeight, width=tabWidth, thickness=tabThickness, tabStyle=tabStyle);
@@ -701,43 +701,43 @@ module gridfinity_cup(
       }
     }
     /*
-    if(extention_enabled.x){     
+    if(extension_enabled.x){
       translate([0,(num_y-0.5)*gf_pitch-wall_thickness-gf_tolerance/2,tabWorkingheight/4*3  + 1*gf_zpitch])
       rotate([0,180,90])
         attachement_clip(height=tabHeight,thickness=tabThickness);
     }
-    if(extention_enabled.x && !extention_enabled.y){
+    if(extension_enabled.x && !extension_enabled.y){
       translate([0,-0.5*gf_pitch+wall_thickness+gf_tolerance/2,tabWorkingheight/4 + 1*gf_zpitch])
         rotate([0,0,90])
         attachement_clip(height=tabHeight,thickness=tabThickness);
     }
-    if(extention_enabled.y){     
+    if(extension_enabled.y){
       translate([(num_x-0.5)*gf_pitch-wall_thickness-gf_tolerance/2,0,tabWorkingheight/4  + 1*gf_zpitch])
       rotate([0,0,180])
         attachement_clip(height=tabHeight,thickness=tabThickness);
     }
-    if(extention_enabled.y && !extention_enabled.x){
+    if(extension_enabled.y && !extension_enabled.x){
       translate([-0.5*gf_pitch+wall_thickness+gf_tolerance/2,0,tabWorkingheight/4*3 + 1*gf_zpitch])
         rotate([0,180,180])
         attachement_clip(height=tabHeight,thickness=tabThickness);
     }
     */
-  }  
-  
+  }
+
   if(help)
   ShowClippers(
-    cutx, 
-    cuty, 
-    size=[num_x,num_y,num_z], 
+    cutx,
+    cuty,
+    size=[num_x,num_y,num_z],
     lip_style,
-    magnet_diameter, 
-    screw_depth, 
-    floor_thickness, 
+    magnet_diameter,
+    screw_depth,
+    floor_thickness,
     filled_in,
     wall_thickness,
     efficient_floor,
-    flat_base); 
-      
+    flat_base);
+
   HelpTxt("gridfinity_cup",[
     "num_x",num_x
     ,"num_y",num_y
@@ -791,11 +791,11 @@ module gridfinity_cup(
     ,"wallcutout_angle",wallcutout_angle
     ,"wallcutout_height",wallcutout_height
     ,"wallcutout_corner_radius",wallcutout_corner_radius
-    ,"extention_enabled",extention_enabled
-    ,"extention_tabs_enabled",extention_tabs_enabled
+    ,"extension_enabled",extension_enabled
+    ,"extension_tabs_enabled",extension_tabs_enabled
     ,"cutx",cutx
     ,"cuty",cuty]
-    ,help);  
+    ,help);
 }
 
 module cutout_pattern(
@@ -827,8 +827,8 @@ module cutout_pattern(
   else if(patternstyle == "voronoi" || patternstyle == "voronoigrid" || patternstyle == "voronoihexgrid"){
     echo("cutout_pattern", canvisSize = [canvisSize.x,canvisSize.y,holeHeight], thickness = holeSpacing.x, round=1);
     rectangle_voronoi(
-      canvisSize = [canvisSize.x,canvisSize.y,holeHeight], 
-      spacing = holeSpacing.x, 
+      canvisSize = [canvisSize.x,canvisSize.y,holeHeight],
+      spacing = holeSpacing.x,
       cellsize = holeSize.x,
       grid = (patternstyle == "voronoigrid" || patternstyle == "voronoihexgrid"),
       gridOffset = (patternstyle == "voronoihexgrid"),
@@ -852,7 +852,7 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
   tabDepth = min(tabHeight/2*0.8, width*0.8, 3.5);
   tabStyle = floor(tabStyle);
   translate([0,0,-height/2])
-  
+
   union()
   {
     if(tabStyle == 2){
@@ -870,7 +870,7 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
            [thickness, -width+thickness, thickness],            //7
            [thickness, -width+thickness, height-thickness],     //8
            [thickness, thickness, height-thickness]                     //9
-           ], 
+           ],
          faces = [[0,1,2,3,4,5],[6,7,8,9]]
       );
       hull()
@@ -888,7 +888,7 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
            [thickness, thickness, height-thickness],                    //9
            [thickness, tabDepth, height-tabDepth],  //10
            [thickness, tabDepth, tabDepth]          //11
-           ], 
+           ],
            faces = [[0,1,2,3,4,5],[6,7,8,9,10,11]]
       );
     } else if(tabStyle == 1){
@@ -906,7 +906,7 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
            [thickness, -width+thickness, thickness],            //7
            [thickness, -width+thickness, height-thickness],     //8
            [thickness, 0, height-thickness]                     //9
-           ], 
+           ],
          faces = [[0,1,2,3,4,5],[6,7,8,9]]
       );
       hull()
@@ -924,7 +924,7 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
            [thickness, 0, height-thickness],                    //9
            [thickness, tabDepth, height-thickness-tabDepth],  //10
            [thickness, tabDepth, thickness+tabDepth]          //11
-           ], 
+           ],
            faces = [[0,1,2,3,4,5],[6,7,8,9,10,11]]
       );
     } else {
@@ -940,7 +940,7 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
            [thickness, -width+thickness, thickness],            //5
            [thickness, -width+thickness, height-thickness],     //6
            [thickness, 0, height-thickness]                     //7
-           ], 
+           ],
          faces = [[0,1,2,3],[4,5,6,7]]
       );
       hull()
@@ -958,7 +958,7 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
            [thickness, 0, height-thickness],                    //9
            [thickness, tabDepth, height-thickness-tabDepth],    //10
            [thickness, tabDepth, thickness+tabDepth]            //11
-           ], 
+           ],
            faces = [[0,1,2,3,4,5],[6,7,8,9,10,11]]
       );
     }
@@ -966,9 +966,9 @@ echo("attachement_clip", height=height, width=width, thickness=thickness, tabSty
 }
 
 
-module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, label_position=default_label_position, 
+module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, label_position=default_label_position,
     label_size=default_label_size, label_relief=default_label_relief, fingerslide=default_fingerslide,  fingerslide_radius=default_fingerslide_radius,
-    magnet_diameter=default_magnet_diameter, screw_depth=default_screw_depth, 
+    magnet_diameter=default_magnet_diameter, screw_depth=default_screw_depth,
     floor_thickness=default_floor_thickness, wall_thickness=default_wall_thickness,
     efficient_floor=default_efficient_floor, half_pitch=default_half_pitch,         chamber_wall_thickness=default_chamber_wall_thickness, chamber_wall_zClearance=default_chamber_wall_zClearance,
     vertical_separator_bend_position = default_vertical_separator_bend_position,
@@ -982,23 +982,23 @@ module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, 
     horizontal_separator_cut_depth = default_horizontal_separator_cut_depth,
     horizontal_separator_positions = [],
     lip_style=default_lip_style, zClearance=default_zClearance, flat_base=default_flat_base, cavity_floor_radius=default_cavity_floor_radius,spacer=default_spacer, box_corner_attachments_only=default_box_corner_attachments_only,sliding_lid_settings=[]) {
-  
+
   floorHeight = calculateFloorHeight(magnet_diameter, screw_depth, floor_thickness);
-  
+
   zpoint = gf_zpitch*num_z-zClearance;
-  
+
   difference() {
     color(color_cupcavity)
     basic_cavity(num_x, num_y, num_z, fingerslide=fingerslide, fingerslide_radius=fingerslide_radius, magnet_diameter=magnet_diameter,
       screw_depth=screw_depth, floor_thickness=floor_thickness, wall_thickness=wall_thickness,
       efficient_floor=efficient_floor, half_pitch=half_pitch, lip_style=lip_style, flat_base=flat_base, cavity_floor_radius=cavity_floor_radius, spacer=spacer, box_corner_attachments_only = box_corner_attachments_only, sliding_lid_settings=sliding_lid_settings, zClearance=zClearance);
-  
 
-    
+
+
     sepFloorHeight = (efficient_floor != "off" ? floor_thickness : floorHeight);
     color(color_divider)
     translate([-gf_pitch/2, -gf_pitch/2, sepFloorHeight-fudgeFactor])
-    separators(  
+    separators(
       length=gf_pitch*num_y,
       height=gf_zpitch*(num_z)-sepFloorHeight+fudgeFactor*2-max(zClearance, chamber_wall_zClearance),
       wall_thickness = chamber_wall_thickness,
@@ -1011,7 +1011,7 @@ module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, 
     color(color_divider)
     translate([gf_pitch*num_x-gf_pitch/2, -gf_pitch/2, sepFloorHeight-fudgeFactor])
     rotate([0,0,90])
-    separators(  
+    separators(
       length=gf_pitch*num_x,
       height=gf_zpitch*(num_z)-sepFloorHeight+fudgeFactor*2-max(zClearance, chamber_wall_zClearance),
       wall_thickness = chamber_wall_thickness,
@@ -1020,7 +1020,7 @@ module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, 
       bend_separation = horizontal_separator_bend_separation,
       cut_depth = horizontal_separator_cut_depth,
       seperator_config = horizontal_separator_positions);
-      
+
     // this is the label
     if (label_style != "disabled") {
       labelSize = let(
@@ -1035,39 +1035,39 @@ module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, 
             [labelx,labely,labelz,labelr];
 
       labelCornerRadius = labelSize[3];
- 
+
       labelPoints = [[ (num_y-0.5)*gf_pitch-labelSize.y, zpoint-labelCornerRadius],
         [ (num_y-0.5)*gf_pitch, zpoint-labelCornerRadius ],
         [ (num_y-0.5)*gf_pitch, zpoint-labelCornerRadius-labelSize.z ]
       ];
-      
+
       separator_positions = calculateSeparators(vertical_separator_positions);
-        
-      // calcualte list of chambers. 
+
+      // calcualte list of chambers.
       labelWidthmm = labelSize.x * gf_pitch;
       color(color_label){
-        chamberWidths = len(separator_positions) < 1 || 
+        chamberWidths = len(separator_positions) < 1 ||
           labelWidthmm == 0 ||
           label_position == "left" ||
           label_position == "center" ||
           label_position == "right" ?
             [ num_x * gf_pitch ] // single chamber equal to the bin length
-            : [ for (i=[0:len(separator_positions)]) 
-              (i==len(separator_positions) 
+            : [ for (i=[0:len(separator_positions)])
+              (i==len(separator_positions)
                 ? num_x * gf_pitch
                 : separator_positions[i]) - (i==0 ? 0 : separator_positions[i-1]) ];
-                      
+
         for (i=[0:len(chamberWidths)-1]) {
           chamberStart = i == 0 ? 0 : separator_positions[i-1];
           chamberWidth = chamberWidths[i];
           label_num_x = (labelWidthmm == 0 || labelWidthmm > chamberWidth) ? chamberWidth : labelWidthmm;
-          label_pos_x = (label_position == "center" || label_position == "centerchamber" )? (chamberWidth - label_num_x) / 2 
-                          : (label_position == "right" || label_position == "rightchamber" )? chamberWidth - label_num_x 
+          label_pos_x = (label_position == "center" || label_position == "centerchamber" )? (chamberWidth - label_num_x) / 2
+                          : (label_position == "right" || label_position == "rightchamber" )? chamberWidth - label_num_x
                           : 0 ;
-                          
+
           translate([(-gf_pitch/2) + ((chamberStart + label_pos_x)),0,0])
           difference(){
-            hull() 
+            hull()
             for (i=[0, 1, 2])
             translate([0, labelPoints[i][0], labelPoints[i][1]])
             rotate([0, 90, 0])
@@ -1078,7 +1078,7 @@ module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, 
               //Right
               sphere(r=labelCornerRadius, $fn=64);
             }
-            
+
             if(label_style == "click"){
               clickSize= [36.7,11.3, 1.2];
               clickRadius = 0.25;
@@ -1098,41 +1098,41 @@ module partitioned_cavity(num_x, num_y, num_z, label_style=default_label_style, 
         }
       }
     }
-    
+
     if (label_style != "disabled") {
-    
+
     }
   }
 }
 
 
 module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  fingerslide_radius=default_fingerslide_radius,
-    magnet_diameter=default_magnet_diameter, screw_depth=default_screw_depth, 
+    magnet_diameter=default_magnet_diameter, screw_depth=default_screw_depth,
     floor_thickness=default_floor_thickness, wall_thickness=default_wall_thickness,
-    efficient_floor=default_efficient_floor, half_pitch=default_half_pitch, 
+    efficient_floor=default_efficient_floor, half_pitch=default_half_pitch,
     lip_style=default_lip_style, flat_base=default_flat_base, cavity_floor_radius=default_cavity_floor_radius, spacer=default_spacer, box_corner_attachments_only = default_box_corner_attachments_only,
     sliding_lid_settings = [],
     zClearance = 0) {
-  
+
   AssertSlidingLidSettings(sliding_lid_settings);
   seventeen = gf_pitch/2-4;
-    
-  reducedlipstyle = 
+
+  reducedlipstyle =
     // replace "reduced" with "none" if z-height is less than 1.2
-    (num_z < 1.2) ? "none" 
+    (num_z < 1.2) ? "none"
     // replace with "reduced" if z-height is less than 1.8
-    : (num_z < 1.8) ? "reduced" 
+    : (num_z < 1.8) ? "reduced"
     : lip_style;
 
   filledInZ = gf_zpitch*num_z;
   zpoint = filledInZ-zClearance;
- 
+
   floorht = min(filledInZ,calculateFloorHeight(magnet_diameter, screw_depth, floor_thickness, efficient_floor=efficient_floor,flat_base=flat_base));
 
   //echo("basic_cavity", efficient_floor=efficient_floor, floor_thickness=floor_thickness, floorht=floorht, filledInZ=filledInZ, reducedlipstyle=reducedlipstyle);
   //Remove floor to create a vertical spacer.
   nofloor = spacer && fingerslide == "none";
-  
+
   //Difference between the wall and support thickness
   lipSupportThickness = (reducedlipstyle == "minimum" || reducedlipstyle == "none") ? 0
     : reducedlipstyle == "reduced" ? gf_lip_upper_taper_height - wall_thickness
@@ -1141,70 +1141,70 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
   //bottom of the lip where it touches the wall
   lipBottomZ = ((reducedlipstyle == "minimum" || reducedlipstyle == "none") ? gf_zpitch*num_z
     : reducedlipstyle == "reduced" ? gf_zpitch*num_z
-    : gf_zpitch*num_z-gf_lip_height-lipSupportThickness); 
-  
+    : gf_zpitch*num_z-gf_lip_height-lipSupportThickness);
+
   innerLipRadius = gf_cup_corner_radius-gf_lip_lower_taper_height-gf_lip_upper_taper_height; //1.15
   innerWallRadius = gf_cup_corner_radius-wall_thickness;
-  
+
 
   slidingLidEdge = gf_cup_corner_radius-sliding_lid_settings[iSlidingLidMinWallThickness];
   aboveLidHeight =  sliding_lid_settings[iSlidingLidThickness] + lipHeight;
-  
+
   cavityHeight= max(lipBottomZ-floorht,0);
   cavity_floor_radius = calcualteCavityFloorRadius(cavity_floor_radius, wall_thickness,efficient_floor);
-  
+
   echo("basic_cavity", floorht=floorht);
-    
+
   // I couldn't think of a good name for this ('q') but effectively it's the
   // size of the overhang that produces a wall thickness that's less than the lip
   // arount the top inside edge.
   q = 1.65-wall_thickness+0.95;  // default 1.65 corresponds to wall thickness of 0.95
-  
+
   //echo("basic_cavity", efficientFloor=efficientFloor, nofloor=nofloor, lipSupportThickness=lipSupportThickness, lipBottomZ=lipBottomZ, innerLipRadius=innerLipRadius, innerWallRadius=innerWallRadius, cavityHeight=cavityHeight, cavity_floor_radius=cavity_floor_radius);
-  
+
   if(filledInZ>floorht) {
     union(){
     difference() {
     union() {
       if (reducedlipstyle == "minimum" || reducedlipstyle == "none") {
         hull() cornercopy(seventeen, num_x, num_y)
-          tz(filledInZ-fudgeFactor) 
+          tz(filledInZ-fudgeFactor)
           cylinder(r=innerWallRadius, h=gf_Lip_Height, $fn=32);   // remove entire lip
-      } 
+      }
       else if (reducedlipstyle == "reduced") {
         lowerTaperZ = filledInZ+gf_lip_lower_taper_height;
         hull() cornercopy(seventeen, num_x, num_y)
         union(){
-          tz(lowerTaperZ) 
+          tz(lowerTaperZ)
           cylinder(
-            r1=innerWallRadius, 
-            r2=gf_cup_corner_radius-gf_lip_upper_taper_height, 
+            r1=innerWallRadius,
+            r2=gf_cup_corner_radius-gf_lip_upper_taper_height,
             h=lipSupportThickness, $fn=32);
-          tz(filledInZ-fudgeFactor) 
+          tz(filledInZ-fudgeFactor)
           cylinder(
-            r=innerWallRadius, 
+            r=innerWallRadius,
             h=lowerTaperZ-filledInZ+fudgeFactor*2, $fn=32);
         }
-      } 
+      }
       else { // normal
         lowerTaperZ = filledInZ-gf_lip_height-lipSupportThickness;
         if(lowerTaperZ <= floorht){
           hull() cornercopy(seventeen, num_x, num_y)
-            tz(floorht) 
+            tz(floorht)
             cylinder(r=innerLipRadius, h=filledInZ-floorht+fudgeFactor*2, $fn=32); // lip
         } else {
           hull() cornercopy(seventeen, num_x, num_y)
-            tz(filledInZ-gf_lip_height-fudgeFactor) 
+            tz(filledInZ-gf_lip_height-fudgeFactor)
             cylinder(r=innerLipRadius, h=gf_lip_height+fudgeFactor*2, $fn=32); // lip
-    
+
           hull() cornercopy(seventeen, num_x, num_y)
-            tz(filledInZ-gf_lip_height-lipSupportThickness-fudgeFactor) 
+            tz(filledInZ-gf_lip_height-lipSupportThickness-fudgeFactor)
             cylinder(
               r1=innerWallRadius,
               r2=innerLipRadius, h=q+fudgeFactor, $fn=32);   // ... to top of thin wall ...
         }
       }
-    
+
       //Cavity below lip
       if(cavityHeight > 0)
        hull() cornercopy(seventeen, num_x, num_y)
@@ -1222,41 +1222,41 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
       belowRampHeight = sliding_lid_settings[iSlidingLidMinSupport];
 
       belowLipHeight = belowLedgeHeight+belowRampHeight;
-       
-       
+
+
       //Sliding lid lower support lip
-      tz(zpoint-belowLipHeight) 
+      tz(zpoint-belowLipHeight)
       difference(){
-        hull() 
+        hull()
           cornercopy(seventeen, num_x, num_y)
-          cylinder(r=innerWallRadius, h=belowLipHeight, $fn=32); 
-          
+          cylinder(r=innerWallRadius, h=belowLipHeight, $fn=32);
+
             union(){
             hull() cornercopy(seventeen, num_x, num_y)
               tz(belowRampHeight-fudgeFactor)
               cylinder(r=slidingLidEdge-sliding_lid_settings[iSlidingLidMinSupport], h=belowLedgeHeight+fudgeFactor*2, $fn=32);
-              
+
             hull() cornercopy(seventeen, num_x, num_y)
             tz(-fudgeFactor)
             cylinder(r1=slidingLidEdge, r2=slidingLidEdge-sliding_lid_settings[iSlidingLidMinSupport], h=belowRampHeight+fudgeFactor, $fn=32);
          }
        }
-      
+
       //Sliding lid upper lip
-      tz(zpoint) 
+      tz(zpoint)
       difference(){
-        hull() 
+        hull()
           cornercopy(seventeen, num_x, num_y)
-          tz(fudgeFactor) 
-          cylinder(r=slidingLidEdge, h=aboveLipHeight, $fn=32); 
+          tz(fudgeFactor)
+          cylinder(r=slidingLidEdge, h=aboveLipHeight, $fn=32);
         union(){
-        hull() 
+        hull()
           cornercopy(seventeen, num_x, num_y)
-          tz(fudgeFactor) 
-          cylinder(r=slidingLidEdge-sliding_lid_settings[iSlidingLidMinSupport], h=aboveLipHeight+fudgeFactor, $fn=32); 
-          
+          tz(fudgeFactor)
+          cylinder(r=slidingLidEdge-sliding_lid_settings[iSlidingLidMinSupport], h=aboveLipHeight+fudgeFactor, $fn=32);
+
         *SlidingLid(
-          num_x=num_x, 
+          num_x=num_x,
           num_y=num_y,
           wall_thickness,
           clearance = 0,
@@ -1266,10 +1266,10 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
         }
       }
     }
-    
+
     // fingerslide inside bottom of cutout
     if(fingerslide != "none"){
-      translate([0, 
+      translate([0,
             reducedlipstyle == "reduced" ? - gf_lip_lower_taper_height
             : reducedlipstyle =="none" ? seventeen+1.15-gf_pitch/2+0.25+wall_thickness
             : 0, 0])
@@ -1277,13 +1277,13 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
           union(){
             if(fingerslide == "rounded"){
               roundedCorner(
-                radius = fingerslide_radius, 
-                length=gf_pitch*num_x, 
+                radius = fingerslide_radius,
+                length=gf_pitch*num_x,
                 height = gf_zpitch*num_z);
             }
             else if(fingerslide == "chamfered"){
               chamferedCorner(
-                chamferLength = fingerslide_radius, 
+                chamferLength = fingerslide_radius,
                 length=gf_pitch*num_x,
                 height = gf_zpitch*num_z);
           }
@@ -1301,23 +1301,23 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
       difference(){
         translate([-0.5*gf_pitch, -0.5*gf_pitch ,-fudgeFactor ])
           cube([num_x*gf_pitch, num_y*gf_pitch, efficientFloorGridHeight]);
-        
+
         difference(){
 
           efficient_floor_grid(
-            num_x, num_y, 
+            num_x, num_y,
             floorStyle = efficient_floor,
-            half_pitch=half_pitch, 
-            flat_base=flat_base, 
+            half_pitch=half_pitch,
+            flat_base=flat_base,
             floor_thickness=floor_thickness,
             margins=q);
-           
+
            if(hasCornerAttachments)
              //Screw and magnet covers required for efficient floor
              gridcopycorners(num_x, num_y, magnetPosition, box_corner_attachments_only){
                 //$gcci=[trans,xi,yi,xx,yy];
-                rotate( $gcci[2] == [ 1, 1] ? [0,0,270] 
-                       : $gcci[2] == [ 1,-1] ? [0,0,180] 
+                rotate( $gcci[2] == [ 1, 1] ? [0,0,270]
+                       : $gcci[2] == [ 1,-1] ? [0,0,180]
                        : $gcci[2] == [-1,-1] ? [0,0,90] :[0,0,0])
                   translate([0,0,floor_thickness-fudgeFactor])
                   hull(){
@@ -1332,12 +1332,12 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
         }
       }
     }
-    
+
     //Sliding lid rebate.
     if(sliding_lid_settings[iSlidingLidEnabled]){
-      tz(zpoint) 
+      tz(zpoint)
       SlidingLid(
-        num_x=num_x, 
+        num_x=num_x,
         num_y=num_y,
         wall_thickness,
         clearance = 0,
@@ -1345,29 +1345,29 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
         lidMinSupport=sliding_lid_settings[iSlidingLidMinSupport],
         lidMinWallThickness=sliding_lid_settings[iSlidingLidMinWallThickness],
         limitHeight = false);
-      
-      //translate([-gf_pitch/2,-gf_pitch/2,zpoint]) 
+
+      //translate([-gf_pitch/2,-gf_pitch/2,zpoint])
       //cube([num_x*gf_pitch,gf_cup_corner_radius,zClearance+gf_Lip_Height]);
       //innerWallRadius = gf_cup_corner_radius-wall_thickness;
-      translate([-gf_pitch/2,-gf_pitch/2,zpoint]) 
-      translate([0,gf_cup_corner_radius,aboveLidHeight]) 
+      translate([-gf_pitch/2,-gf_pitch/2,zpoint])
+      translate([0,gf_cup_corner_radius,aboveLidHeight])
       rotate([270,0,0])
       chamferedCorner(
         cornerRadius = aboveLidHeight/4,
         chamferLength = aboveLidHeight,
-        length=num_x*gf_pitch, 
+        length=num_x*gf_pitch,
         height = aboveLidHeight,
         width = gf_cup_corner_radius);
     }
   }
   }
-  
+
   // cut away side lips if num_x is less than 1
   if (num_x < 1) {
     top = num_z*gf_zpitch+gf_Lip_Height;
     height = top-lipBottomZ+fudgeFactor*2;
-    
-    hull() 
+
+    hull()
     for (x=[-gf_pitch/2+1.5+0.25+wall_thickness, -gf_pitch/2+num_x*gf_pitch-1.5-0.25-wall_thickness]){
       for (y=[-10, (num_y-0.5)*gf_pitch-seventeen])
       translate([x, y, top-height])
@@ -1378,25 +1378,25 @@ module basic_cavity(num_x, num_y, num_z, fingerslide=default_fingerslide,  finge
   if (nofloor) {
       tz(-fudgeFactor)
         hull()
-        cornercopy(num_x=num_x, num_y=num_y, r=seventeen) 
+        cornercopy(num_x=num_x, num_y=num_y, r=seventeen)
         cylinder(r=2, h=gf_cupbase_lower_taper_height+fudgeFactor, $fn=32);
-      gridcopy(1, 1) 
+      gridcopy(1, 1)
         EfficientFloor(num_x, num_y,-fudgeFactor, q);
   }
 }
 
-function calculateSeparators(seperator_config) = 
-  is_string(seperator_config) ? [] : 
+function calculateSeparators(seperator_config) =
+  is_string(seperator_config) ? [] :
   is_list(seperator_config) ? seperator_config : [];
 
-function calculateSeparatorsv2(seperator_config) = is_string(seperator_config) 
+function calculateSeparatorsv2(seperator_config) = is_string(seperator_config)
   ? let(separators = split(seperator_config, "|")) // takes part of an array
     [for (i = [0:len(separators)-1]) csv_parse(separators[i])]
-  : (is_list(seperator_config) && len(seperator_config) > 0) 
+  : (is_list(seperator_config) && len(seperator_config) > 0)
   ? [for (i = [0:len(seperator_config)-1])[seperator_config[i]]]
   : [];
 
-module separators(  
+module separators(
   length,
   height,
   wall_thickness = 0,
@@ -1447,16 +1447,16 @@ module separators(
 
 //creates the gird of efficient floor pads to be added to the cavity for removal from the overall filled in bin.
 module efficient_floor_grid(
-  num_x, num_y, 
-  floorStyle = "on", 
-  half_pitch=false, 
-  flat_base=false, 
-  floor_thickness, 
+  num_x, num_y,
+  floorStyle = "on",
+  half_pitch=false,
+  flat_base=false,
+  floor_thickness,
   margins=0) {
   if (flat_base) {
-    EfficientFloor(num_x, num_y, 
-      floor_thickness, 
-      margins, 
+    EfficientFloor(num_x, num_y,
+      floor_thickness,
+      margins,
       floorRadius=(floorStyle == "rounded" ? 1 : 0),
       floorSmooth=(floorStyle == "smooth"));
   }
@@ -1464,9 +1464,9 @@ module efficient_floor_grid(
     gridcopy(ceil(num_x*2), ceil(num_y*2), gf_pitch/2) {
       EfficientFloor(
         ($gci.x == ceil(num_x*2)-1 ? (num_x*2-$gci.x)/2 : 0.5),
-        ($gci.y == ceil(num_y*2)-1 ? (num_y*2-$gci.y)/2 : 0.5), 
-        floor_thickness, 
-        margins, 
+        ($gci.y == ceil(num_y*2)-1 ? (num_y*2-$gci.y)/2 : 0.5),
+        floor_thickness,
+        margins,
         floorRadius=(floorStyle == "rounded" ? 1 : 0),
         floorSmooth=(floorStyle == "smooth"));
     }
@@ -1476,9 +1476,9 @@ module efficient_floor_grid(
       EfficientFloor(
         //Calculate pad size, last cells might not be 100%
         ($gci.x == ceil(num_x)-1 ? num_x-$gci.x : 1),
-        ($gci.y == ceil(num_y)-1 ? num_y-$gci.y : 1), 
-        floor_thickness, 
-        margins, 
+        ($gci.y == ceil(num_y)-1 ? num_y-$gci.y : 1),
+        floor_thickness,
+        margins,
         floorRadius=(floorStyle == "rounded" ? 1 : 0),
         floorSmooth=(floorStyle == "smooth"));
     }
@@ -1487,9 +1487,9 @@ module efficient_floor_grid(
 
 //Creates the efficient floor pad that will be removed from the floor
 module EfficientFloor(
-  num_x=1, 
-  num_y=1, 
-  floor_thickness, 
+  num_x=1,
+  num_y=1,
+  floor_thickness,
   margins=0,
   floorRadius=0,
   floorSmooth = true
@@ -1503,27 +1503,27 @@ module EfficientFloor(
     union(){
       // establishes floor
       hull(){
-        tz(floor_thickness+floorRadius) 
-        cornercopy(num_x=num_x, num_y=num_y, r=seventeen-0.5) 
+        tz(floor_thickness+floorRadius)
+        cornercopy(num_x=num_x, num_y=num_y, r=seventeen-0.5)
         cylinder(r=1, h=5, $fn=32);
 
         if(floorRadius > 0)
         {
-          tz(floor_thickness+floorRadius) 
-          cornercopy(num_x=num_x, num_y=num_y, r=seventeen-(floorRadius-0.5)) 
+          tz(floor_thickness+floorRadius)
+          cornercopy(num_x=num_x, num_y=num_y, r=seventeen-(floorRadius-0.5))
           sphere(r=floorRadius, $fn=32);
         }
       }
-      
+
       // tapered top portion
      hull() {
-        tz(3) 
-        cornercopy(num_x=num_x, num_y=num_y, r=seventeen-0.5) 
+        tz(3)
+        cornercopy(num_x=num_x, num_y=num_y, r=seventeen-0.5)
         //cylinder(r=1, h=1, $fn=32);
         sphere(r=1, $fn=32);
-        
-        tz(5-(+2.5-1.15-margins)) 
-        cornercopy(num_x=num_x, num_y=num_y, r=seventeen) 
+
+        tz(5-(+2.5-1.15-margins))
+        cornercopy(num_x=num_x, num_y=num_y, r=seventeen)
         cylinder(r=1.15+margins, h=4, $fn=32);
       }
     }
@@ -1531,22 +1531,22 @@ module EfficientFloor(
   else{
     // tapered top portion
     hull() {
-      tz(5+floor_thickness-fudgeFactor) 
-      cornercopy(num_x=num_x, num_y=num_y, r=seventeen) 
+      tz(5+floor_thickness-fudgeFactor)
+      cornercopy(num_x=num_x, num_y=num_y, r=seventeen)
       cylinder(r=1.15+margins, h=4, $fn=32);
-   
+
       // tapered top portion
       cornerRadius = 1.15+margins;
       tz(floor_thickness+cornerRadius)
       hull() {
-        cornercopy(num_x=num_x, num_y=num_y, r=seventeen-cornerRadius) 
+        cornercopy(num_x=num_x, num_y=num_y, r=seventeen-cornerRadius)
         sphere(r=cornerRadius, $fn=32);
-          
+
         tz(2.5)
         union(){
-          cornercopy(num_x=num_x, num_y=num_y, r=seventeen) 
+          cornercopy(num_x=num_x, num_y=num_y, r=seventeen)
           cylinder(r=cornerRadius, h=cornerRadius, $fn=32);
-          cornercopy(num_x=num_x, num_y=num_y, r=seventeen) 
+          cornercopy(num_x=num_x, num_y=num_y, r=seventeen)
           sphere(r=cornerRadius, $fn=32);
         }
       }
